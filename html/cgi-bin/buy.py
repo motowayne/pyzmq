@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import cgi
+import time
+
+time.sleep(5)
 
 form = cgi.FieldStorage()
 
