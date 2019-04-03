@@ -1,0 +1,36 @@
+<html>
+<head>
+<script>
+var t;
+function refresh() {
+    x = document.getElementById("myDiv").innerHTML;
+    document.getElementById("myDiv").innerHTML = x + " .";
+}
+
+function timer() {
+    t = window.setInterval(refresh, 1000);
+}
+
+function test() {
+	xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==1) {
+            timer();
+            document.getElementById("myDiv").innerHTML="Waiting";
+        }
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            window.clearInterval(t);
+            document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+        }
+    }
+	xmlhttp.open("GET", "cgi-bin/buy.py", true);
+	xmlhttp.send();
+}
+</script>
+</head>
+
+<body>
+<div id="myDiv"></div>
+<button type="button" onclick="test()"> Test </button>
+</body>
+</html>
